@@ -10,6 +10,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
@@ -20,6 +22,9 @@ import android.provider.MediaStore;
 import android.util.Log;
 
 import com.example.detecttext_android.R;
+import com.example.detecttext_android.Utility.Vision.Abstract.IDetectText;
+import com.example.detecttext_android.Utility.Vision.Abstract.ResultListener;
+import com.example.detecttext_android.Utility.Vision.Concrete.VisionFirebase.VisionFirebase;
 import com.example.detecttext_android.View.Component.Activity.BaseActivity;
 import com.example.detecttext_android.View.Component.ImageView.DTImageView;
 
@@ -38,6 +43,8 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
 
     private Uri outputFileUri;
 
+    private IDetectText detectText;
+
     @BindView(R.id.image_view)
     DTImageView imageView;
 
@@ -50,6 +57,12 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.setup();
+    }
+
+    private void setup()
+    {
+        this.detectText = new VisionFirebase();
     }
 
     @Override
@@ -129,13 +142,52 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
                 if (selectedImageUri != null)
                 {
                     this.imageView.setImageURI(selectedImageUri);
-                    this.detectText(null);
+                    this.detectText(this.getBitMapFromUri(selectedImageUri));
                 }
             }
         }
     }
 
-    private void detectText(Image image)
+    private Bitmap getBitMapFromUri(Uri uri)
+    {
+        try {
+            return MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    private void detectText(Bitmap bitmap)
+    {
+        if (bitmap == null)
+            return;
+        this.detectText.getText(bitmap, new ResultListener() {
+            @Override
+            public void onSuccess(String result) {
+                checkResult(result);
+            }
+
+            @Override
+            public void onError(String error) {
+                showErrorMessage(error);
+            }
+        });
+    }
+
+    private void checkResult(String result)
+    {
+
+    }
+
+    private void showErrorMessage(String errorText)
+    {
+
+    }
+
+    private void showSuccessMessage()
     {
 
     }
