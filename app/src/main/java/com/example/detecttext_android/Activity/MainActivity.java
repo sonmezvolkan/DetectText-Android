@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,7 +28,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -127,9 +127,17 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
                     selectedImageUri = data == null ? null : data.getData();
                 }
                 if (selectedImageUri != null)
+                {
                     this.imageView.setImageURI(selectedImageUri);
+                    this.detectText(null);
+                }
             }
         }
+    }
+
+    private void detectText(Image image)
+    {
+
     }
 
     private Uri createImageFile()
