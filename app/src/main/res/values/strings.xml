@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">DetectText-Android</string>
     <string name="detect_text">Detect Text</string>
+    <string name="select_source">Select Source</string>
 </resources>
