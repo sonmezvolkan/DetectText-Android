@@ -75,8 +75,8 @@ public class DTDialogFragment extends DialogFragment {
     {
         if (type == DialogType.SUCCESS)
             this.imageView.setImageDrawable(getResources().getDrawable(R.drawable.check_icon));
-        //else
-          //  this.imageView.setImageDrawable(getResources().getDrawable(R.drawable.unlink_icon_and_circle));
+        else
+            this.imageView.setImageDrawable(getResources().getDrawable(R.drawable.unlink_icon_and_circle));
         this.lblTitle.setText(this.title);
         this.lblMessage.setText(this.message);
 

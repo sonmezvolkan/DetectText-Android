@@ -192,7 +192,7 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
                 return;
             }
         }
-        this.showErrorMessage("Üzgünüz tarattığınız fiş geçerli değil");
+        this.showErrorMessage(getString(R.string.error_text));
     }
 
     private void showErrorMessage(String errorText)
