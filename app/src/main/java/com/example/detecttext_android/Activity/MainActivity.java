@@ -3,6 +3,9 @@ package com.example.detecttext_android.Activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
 import android.content.ComponentName;
@@ -21,12 +24,14 @@ import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.util.Log;
 
+import com.example.detecttext_android.Constant.Constant;
 import com.example.detecttext_android.R;
 import com.example.detecttext_android.Utility.Vision.Abstract.IDetectText;
 import com.example.detecttext_android.Utility.Vision.Abstract.ResultListener;
 import com.example.detecttext_android.Utility.Vision.Concrete.VisionFirebase.VisionFirebase;
 import com.example.detecttext_android.View.Component.Activity.BaseActivity;
 import com.example.detecttext_android.View.Component.ImageView.DTImageView;
+import com.example.detecttext_android.View.Dialog.DTDialogFragment;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -179,17 +184,37 @@ public class MainActivity extends BaseActivity implements ActivityCompat.OnReque
 
     private void checkResult(String result)
     {
-
+        for (String word : Constant.SEARCHED_WORD)
+        {
+            if (result.contains(word))
+            {
+                this.showSuccessMessage();
+                return;
+            }
+        }
+        this.showErrorMessage("Üzgünüz tarattığınız fiş geçerli değil");
     }
 
     private void showErrorMessage(String errorText)
     {
-
+        DTDialogFragment fragment = new DTDialogFragment("Bir sorun var!", errorText, DTDialogFragment.DialogType.ERROR);
+        fragment.show(this.getFragmentTransaction(), "dialog");
     }
 
     private void showSuccessMessage()
     {
+        DTDialogFragment fragment = new DTDialogFragment("Tebrikler", "200 puan kazandınız", DTDialogFragment.DialogType.SUCCESS);
+        fragment.show(this.getFragmentTransaction(), "dialog");
+    }
 
+    private FragmentTransaction getFragmentTransaction()
+    {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        Fragment prev = getSupportFragmentManager().findFragmentByTag("dialog");
+        if (prev != null)
+            fragmentTransaction.remove(prev);
+        fragmentTransaction.addToBackStack(null);
+        return fragmentTransaction;
     }
 
     private Uri createImageFile()

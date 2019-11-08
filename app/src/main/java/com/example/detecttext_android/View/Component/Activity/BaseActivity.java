@@ -17,4 +17,5 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public abstract int provideLayoutResId();
+
 }
