@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "624651089110",
+    "firebase_url": "https://detectiontext-92d18.firebaseio.com",
+    "project_id": "detectiontext-92d18",
+    "storage_bucket": "detectiontext-92d18.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:624651089110:android:d00b29d918697316e18577",
+        "android_client_info": {
+          "package_name": "com.example.detecttext_android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "624651089110-iadedumnnjtokh73ctq6hbv9ag9hhsq7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvwyGJugOg_gjc8n-S-of2RrZcYT1nnrQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "624651089110-iadedumnnjtokh73ctq6hbv9ag9hhsq7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "624651089110-nniolt0klvh9qjioejmvejplk4begm8t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.porte.DetectTextApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
